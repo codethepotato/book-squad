@@ -20,7 +20,7 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
-    home_state = db.Column(db.String, nullable = False)
+    
 
     orders = db.relationship('Order', back_populates = 'user')
     programmers = association_proxy('orders', 'programmer')
@@ -36,8 +36,8 @@ class Programmer(db.Model, SerializerMixin):
     __tablename__ = 'programmers'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String, nullable = False)
-    specialty = db.Column(db.String, nullable = False)
+    name = db.Column(db.String)
+    specialty = db.Column(db.String)
 
     orders = db.relationship('Order', back_populates = 'programmer')
     users = association_proxy('orders', 'user')

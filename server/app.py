@@ -19,6 +19,27 @@ migrate = Migrate(app, db)
 db.init_app(app)
 api = Api(app)
 
+class Users(Resource):
+    def get(self):
+        users = [u.to_dict(rules=()) for u in User.query.all()]
+        return make_response(users, 200)
+    
+api.add_resource(Users, '/users')
+
+class Programmers(Resource):
+    def get(self):
+        programmers = [p.to_dict() for p in Programmer.query.all()]
+        return make_response(programmers, 200)
+    
+api.add_resource(Programmers, '/programmers')
+
+class Orders(Resource):
+    def get(self):
+        orders = [o.to_dict() for o in Order.query.all()]
+        return make_response(orders, 200)
+    
+api.add_resource(Orders, '/orders')
+
 
 
 
