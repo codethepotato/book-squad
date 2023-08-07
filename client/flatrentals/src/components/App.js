@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import Programmers from './Programmers';
-import Orders from './Orders'; 
+import Orders from './Orders';
 import '../App.css';
 import { useEffect, useState } from 'react';
 import Home from './Home';
@@ -10,6 +10,9 @@ import Navigation from './NavBar';
 function App() {
 
   const [programmers, setProgrammers] = useState([])
+
+  const [selectedOrders, setSelectedOrders] = useState([])
+
   useEffect(() => {
     fetch('http://localhost:5555/programmers')
       .then(r => r.json())
@@ -18,17 +21,17 @@ function App() {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
+
   return (
     <div>
       <Navigation />
       <Routes>
-        <Route path='/' element={<Home programmers={programmers}/>}></Route>
-        <Route path='/Programmers' element={<Programmers/>}></Route>
-        <Route path='/Orders' element={<Orders/>}></Route>
+        <Route path='/' element={<Home programmers={programmers} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} />}></Route>
+        <Route path='/Programmers' element={<Programmers />}></Route>
+        <Route path='/Orders' element={<Orders selectedOrders={selectedOrders} />}></Route>
       </Routes>
-      </div>
+    </div>
   )
 }
-  
+
 export default App;
