@@ -15,48 +15,36 @@ metadata = MetaData(naming_convention={
 db = SQLAlchemy(metadata=metadata)
 
 
-
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable = False)
+    home_state = db.Column(db.String, nullable = False)
 
-    #relationships
-
-    #serialization rules
-
-    #validations
-
+    orders = db.relationship('Order', back_populates = 'user')
+    programmers = association_proxy('orders', 'programmer')
+   
 
 
 class Programmer(db.Model, SerializerMixin):
     __tablename__ = 'programmers'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
-    strength = db.Column(db.String)
+    name = db.Column(db.String, nullable = False)
+    specialty = db.Column(db.String, nullable = False)
 
-    #relationships
-    orders = db.relationship('Order', back_populates = 'programmer' )
-
-    #serialization rules
-
-    #validations
-
+    orders = db.relationship('Order', back_populates = 'programmer')
+    users = association_proxy('orders', 'user')
 
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key = True)
-    programmer_id = db.Column(db.Integer, db.ForeignKey('programmers.id'))
+    cost = db.Column(db.Integer, nullable = False)
+
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    cost = db.Column(db.Integer)
+    programmer_id = db.Column(db.Integer, db.ForeignKey('programmers.id'))
 
-    #relationships
+    user = db.relationship('User', back_populates = 'orders')
     programmer = db.relationship('Programmer', back_populates = 'orders')
-    users = db.relationship('User', back_populates = 'orders')
-
-    #serialization rules
-
-    #validations
