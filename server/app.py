@@ -1,5 +1,5 @@
 from flask import Flask
-from models import db, Episode, Guest, Appearance
+from models import db, User, Order, Programmer
 from flask_migrate import Migrate
 from flask import Flask, request, make_response
 from flask_restful import Api, Resource
@@ -19,9 +19,6 @@ migrate = Migrate(app, db)
 db = SQLAlchemy(metadata=metadata)
 db.init_app(app)
 api = Api(app)
-
-
-
 
 
 
