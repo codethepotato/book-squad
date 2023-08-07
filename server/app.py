@@ -41,7 +41,24 @@ class Orders(Resource):
         orders = [o.to_dict() for o in Order.query.all()]
         return make_response(orders, 200)
     
+    def post(self):
+        data = request.get_json()
+        new_order = Order(cost = data['cost'])
+        db.session.add(new_order)
+        db.session.commit()
+        return make_response(new_order.to_dict(), 201)
+
+    
 api.add_resource(Orders, '/orders')
+
+class OrdersById(Resource):
+    def get(self, id):
+        order = Order.query.filter_by(id = id).first()
+        db.session.delete(order)
+        db.session.commit()
+        return make_response({}, 404)
+    
+api.add_resource(OrdersById, '/orders/<int:id>')
 
 
 

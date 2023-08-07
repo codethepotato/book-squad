@@ -3,10 +3,15 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 
 function HomeCard({name, specialty, picture,}) {
+
+  function handleOrder() {
+    console.log('was clicked')
+  }
+
     return(
         <div className="column">
        <Card>
-    <Image src='/images/avatar/large/matthew.png' wrapped ui={false} />
+    <Image src={picture} wrapped ui={false} />
     <Card.Content>
       <Card.Header>{name}</Card.Header>
       <Card.Meta>
@@ -18,7 +23,7 @@ function HomeCard({name, specialty, picture,}) {
     </Card.Content>
     <Card.Content extra>
       <a>
-        <Icon name='user' />
+        <Icon onClick={handleOrder} name='user' />
         Order
       </a>
     </Card.Content>
