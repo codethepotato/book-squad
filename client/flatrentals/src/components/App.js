@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
 import Programmers from './Programmers';
 import Orders from './Orders'; 
 import '../App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Home from './Home';
 import Navigation from './NavBar';
 
 function App() {
+
+  const [programmers, setProgrammers] = useState([])
   useEffect(() => {
     fetch('http://localhost:5555/programmers')
       .then(r => r.json())
-      .then(allUsers => {
-        console.log(allUsers);
-      })
+      .then(allProgrammers => setProgrammers(allProgrammers))
       .catch(error => {
         console.error('Error fetching data:', error);
       });
@@ -23,7 +23,7 @@ function App() {
     <div>
       <Navigation />
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
+        <Route path='/' element={<Home programmers={programmers}/>}></Route>
         <Route path='/Programmers' element={<Programmers/>}></Route>
         <Route path='/Orders' element={<Orders/>}></Route>
       </Routes>
