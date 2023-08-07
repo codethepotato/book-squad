@@ -62,7 +62,7 @@ class Order(db.Model, SerializerMixin):
     programmer = db.relationship('Programmer', back_populates = 'orders')
 
 
-    serialize_rules = ('-user.order', '-programmer.order', )
+    serialize_rules = ('-user.orders', '-programmer.orders', )
 
     def __repr__(self):
         return f'<Order {self.id}>'
