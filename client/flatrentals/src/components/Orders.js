@@ -23,6 +23,7 @@ function Orders({ selectedOrders }) {
                         </a>
                     </Card.Content>
                 </Card>
+                <button class="ui button"><br-span><br-bold><br-fixation fixation-strength="1">O</br-fixation><br-fixation fixation-strength="2">r</br-fixation><br-fixation fixation-strength="3">d</br-fixation><br-fixation fixation-strength="4">e</br-fixation></br-bold><br-edge>r</br-edge></br-span></button>
             </div>
         ))
 
