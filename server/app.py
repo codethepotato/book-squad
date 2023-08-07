@@ -1,6 +1,4 @@
 from flask import Flask
-from models import db, User, Order, Programmer
-
 from models import db, User, Programmer, Order
 from flask_migrate import Migrate
 from flask import Flask, request, make_response

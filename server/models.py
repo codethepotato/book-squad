@@ -24,7 +24,12 @@ class User(db.Model, SerializerMixin):
 
     orders = db.relationship('Order', back_populates = 'user')
     programmers = association_proxy('orders', 'programmer')
+
+
+    serialize_rules = ('-orders.user', )
    
+    def __repr__(self):
+        return f'<User {self.id}: {self.name}>'
 
 
 class Programmer(db.Model, SerializerMixin):
@@ -37,6 +42,12 @@ class Programmer(db.Model, SerializerMixin):
     orders = db.relationship('Order', back_populates = 'programmer')
     users = association_proxy('orders', 'user')
 
+
+    serialize_rules = ('-orders.programmer', )
+
+    def __repr__(self):
+        return f'<Programmer {self.id}: {self.name}: {self.specialty}>'
+
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
@@ -48,3 +59,9 @@ class Order(db.Model, SerializerMixin):
 
     user = db.relationship('User', back_populates = 'orders')
     programmer = db.relationship('Programmer', back_populates = 'orders')
+
+
+    serialize_rules = ('-user.order', '-programmer.order', )
+
+    def __repr__(self):
+        return f'<Order {self.id}>'
