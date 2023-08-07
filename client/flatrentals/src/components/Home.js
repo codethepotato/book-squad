@@ -1,12 +1,14 @@
 import React from "react";
 import  useState  from "react";
-
+import HomeCard from './HomeCard'
+import TopBanner from './TopBanner'
 
 function Home(){
     return(
         <div className="Homepage"> 
             <div>
-                <p>hello</p>
+                <TopBanner />
+                <HomeCard />
             </div>
         </div>
     )
