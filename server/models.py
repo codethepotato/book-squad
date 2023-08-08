@@ -15,19 +15,21 @@ metadata = MetaData(naming_convention={
 db = SQLAlchemy(metadata=metadata)
 
 
-
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable = False)
+    
 
-    #relationships
+    orders = db.relationship('Order', back_populates = 'user')
+    programmers = association_proxy('orders', 'programmer')
 
-    #serialization rules
 
-    #validations
-
+    serialize_rules = ('-orders.user', )
+   
+    def __repr__(self):
+        return f'<User {self.id}: {self.name}>'
 
 
 class Programmer(db.Model, SerializerMixin):
@@ -35,28 +37,31 @@ class Programmer(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    strength = db.Column(db.String)
+    specialty = db.Column(db.String)
 
-    #relationships
-    orders = db.relationship('Order', back_populates = 'programmer' )
+    orders = db.relationship('Order', back_populates = 'programmer')
+    users = association_proxy('orders', 'user')
 
-    #serialization rules
 
-    #validations
+    serialize_rules = ('-orders.programmer', )
 
+    def __repr__(self):
+        return f'<Programmer {self.id}: {self.name}: {self.specialty}>'
 
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key = True)
-    programmer_id = db.Column(db.Integer, db.ForeignKey('programmers.id'))
+    cost = db.Column(db.Integer, nullable = False)
+
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    cost = db.Column(db.Integer)
+    programmer_id = db.Column(db.Integer, db.ForeignKey('programmers.id'))
 
-    #relationships
+    user = db.relationship('User', back_populates = 'orders')
     programmer = db.relationship('Programmer', back_populates = 'orders')
-    users = db.relationship('User', back_populates = 'orders')
 
-    #serialization rules
 
-    #validations
+    serialize_rules = ('-user.order', '-programmer.order', )
+
+    def __repr__(self):
+        return f'<Order {self.id}>'
