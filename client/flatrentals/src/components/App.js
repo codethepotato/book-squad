@@ -1,9 +1,11 @@
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
+import Programmers from './Programmers';
+import Orders from './Orders'; 
 import '../App.css';
-import { Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Home from './Home';
-
+import Navigation from './NavBar';
 
 function App() {
   useEffect(() => {
@@ -18,16 +20,15 @@ function App() {
   }, []);
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <Routes>
-          <Route path="/" element={<Home />}  />
-        </Routes>
-      </header>
-    </div>
-
-  
-  );
+    <div>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/Programmers' element={<Programmers/>}></Route>
+        <Route path='/Orders' element={<Orders/>}></Route>
+      </Routes>
+      </div>
+  )
 }
-
+  
 export default App;
