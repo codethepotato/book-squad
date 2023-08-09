@@ -38,6 +38,7 @@ class Programmer(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     specialty = db.Column(db.String)
+    picture = db.Column(db.String)
 
     orders = db.relationship('Order', back_populates = 'programmer')
     users = association_proxy('orders', 'user')
