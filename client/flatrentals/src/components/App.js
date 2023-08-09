@@ -9,7 +9,7 @@ import Navigation from './NavBar';
 
 function App() {
   useEffect(() => {
-    fetch('http://localhost:5555/users')
+    fetch('http://localhost:5555/programmers')
       .then(r => r.json())
       .then(allUsers => {
         console.log(allUsers);
