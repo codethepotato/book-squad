@@ -50,10 +50,11 @@ class Orders(Resource):
     
     def post(self):
         data = request.get_json()
-        new_order = Order(cost = data['cost'])
+        new_order = Order(cost = data['cost'], user_id = data["user_id"], programmer_id = data["programmer_id"])
         db.session.add(new_order)
         db.session.commit()
         return make_response(new_order.to_dict(), 201)
+    
 
     
 api.add_resource(Orders, '/orders')
