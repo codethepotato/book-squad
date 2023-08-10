@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'semantic-ui-react'
 
-function OrderCard({ cost, programmer, specialty, id }) {
+function OrderCard({ cost, programmer, specialty, id, onEdit}) {
 
   const handleDelete = async () => {
     try {
@@ -34,6 +34,9 @@ function OrderCard({ cost, programmer, specialty, id }) {
         <Button onClick={handleDelete} color="red">
           Delete
         </Button>
+        <Button onClick={() => onEdit(id)} color="blue">
+            Edit
+        </Button> 
       </Card.Content>
     </Card>
   )

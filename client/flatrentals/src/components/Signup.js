@@ -8,12 +8,18 @@ function Signup() {
 
     const validate = (values) => {
         const errors = {};
-
+        
         if (!values.name) {
             errors.name = 'Name is required';
+        } else if (typeof values.name !== 'string') {
+            errors.name = 'Name must be a string';
+        } else if (values.name.length > 20) {
+            errors.name = 'Name must be 20 characters or less';
         }
-        return errors; 
-    }
+    
+        return errors;
+    };
+    
     const handleSubmit = async (values) => {
         try {
             const response = await fetch('http://localhost:5555/users', {

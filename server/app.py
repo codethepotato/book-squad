@@ -78,20 +78,21 @@ class OrdersById(Resource):
     
     
     def patch(self, id):
-        orderToChange = Order.query.filter_by(id=id).first()
-        if not Order:
-            return make_response({"error":"Order Not Found"}, 404)
-        data = request.json()
+        order = Order.query.filter_by(id = id).first()
+        if not order:
+            return make_response(
+                {'error': 'can not find that order'}, 404
+            )
+        data = request.json
         for key in data:
             try:
-                setattr(orderToChange,key,data[key])
+                setattr(order, key, data[key])
             except ValueError as v_error:
-                return make_response({"errors": [str(v_error)]}, 422)
+                return make_response({'errors': [str(v_error)]}, 422)
+            
         db.session.commit()
-        return make_response(orderToChange.to_dict(), 201)
-
-
-    
+        return make_response(order.to_dict(), 200)
+        
 api.add_resource(OrdersById, '/orders/<int:id>')
 
 

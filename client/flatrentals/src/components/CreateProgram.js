@@ -10,12 +10,17 @@ function CreateProgrammer() {
 
     const validate = (values) => {
         const errors = {};
-
+    
         if (!values.name) {
             errors.name = 'Name is required';
         }
-        return errors; 
-    }
+    
+        if (!values.specialty) {
+            errors.specialty = 'Specialty is required';
+        }
+    
+        return errors;
+    };
     const handleSubmit = async (values) => {
         try {
             const response = await fetch('http://localhost:5555/programmers/', {

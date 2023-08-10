@@ -12,19 +12,28 @@ function CreateOrder() {
 
     const validate = (values) => {
         const errors = {};
-  
+    
         if (!values.cost) {
-            errors.name = 'Cost is required';
+            errors.cost = 'Cost is required';
+        } else if (isNaN(values.cost)) {
+            errors.cost = 'Cost must be a number';
         }
+    
         if (!values.user_id) {
-            errors.user_id = 'User ID is required'
+            errors.user_id = 'User ID is required';
+        } else if (isNaN(values.user_id)) {
+            errors.user_id = 'User ID must be a number';
         }
-        if (!values.programmer_id){
-            errors.programmer_id = "Programmer ID is Required"
+    
+        if (!values.programmer_id) {
+            errors.programmer_id = 'Programmer ID is required';
+        } else if (isNaN(values.programmer_id)) {
+            errors.programmer_id = 'Programmer ID must be a number';
         }
-        return errors; 
-    }
-
+    
+        return errors;
+    };
+    
     const initialValues = {
         cost: "",
         user_id: "",
