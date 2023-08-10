@@ -27,7 +27,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path='/' element={<Home programmers={programmers} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} />}></Route>
-        <Route path='/Programmers' element={<Programmers />}></Route>
+        <Route path='/Programmers' element={<Programmers programmers={programmers} />}></Route>
         <Route path='/Orders' element={<Orders selectedOrders={selectedOrders} />}></Route>
       </Routes>
     </div>

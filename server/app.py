@@ -41,6 +41,14 @@ class Programmers(Resource):
         programmers = [p.to_dict() for p in Programmer.query.all()]
         return make_response(jsonify(programmers), 200)
     
+    def post(self):
+        data = request.get_json()
+        new_programmer = Programmer(name = data['name'], specialty = data['specialty'], picture = data['picture'])
+        db.session.add(new_programmer)
+        db.session.commit()
+        return make_response(new_programmer.to_dict(), 201)
+
+    
 api.add_resource(Programmers, '/programmers/')
 
 class Orders(Resource):

@@ -5,6 +5,15 @@ function Signup() {
     const initialValues = {
         name: '',
     }
+
+    const validate = (values) => {
+        const errors = {};
+
+        if (!values.name) {
+            errors.name = 'Name is required';
+        }
+        return errors; 
+    }
     const handleSubmit = async (values) => {
         try {
             const response = await fetch('http://localhost:5555/users', {
@@ -26,7 +35,7 @@ function Signup() {
     return (
     <div>
       <h2>Signup</h2>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmit}>
         <Form>
           <div>
             <label>Name</label>
