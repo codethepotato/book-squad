@@ -2,10 +2,10 @@ import React from "react";
 import { Card, Icon, Image } from 'semantic-ui-react'
 
 
-function ProgrammerCard({name, picture, specialty}){
+function ProgrammerCard({ name, picture, specialty }) {
 
-    return(
-        <div className="column">
+  return (
+    <div className="column">
       <Card>
         <Image src={picture} wrapped ui={false} />
         <Card.Content>
@@ -19,8 +19,8 @@ function ProgrammerCard({name, picture, specialty}){
         </Card.Content>
       </Card>
     </div>
-        
-    )
+
+  )
 }
 
 export default ProgrammerCard
