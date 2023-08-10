@@ -1,19 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import { Card } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react';
+import { Card, Button } from 'semantic-ui-react'
 
-function OrderCard({cost, programmer, specialty}) {
-    const items = [
-        {
-          header: `Programmer: ${programmer}`,
-          description:
-            `Specialty: ${specialty}`,
-          meta: `Cost: ${cost}`,
+function OrderCard({ cost, programmer, specialty, id }) {
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5555/orders/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ]
-    
-      return <Card.Group items={items} />;
+        body: JSON.stringify(),
+      });
+      if (response.ok) {
+        handleDelete(id)
+      } else {
+        console.error('Registration failed');
+      }
+    } catch (error) {
+      console.log('Registration failed:', error)
+    }
+  }
+
+
+  return (
+    <Card>
+      <Card.Content>
+        <Card.Header>{programmer}</Card.Header>
+        <Card.Description>{specialty}</Card.Description>
+        <Card.Meta>{`Cost: ${cost}`}</Card.Meta>
+      </Card.Content>
+      <Card.Content extra>
+        <Button onClick={handleDelete} color="red">
+          Delete
+        </Button>
+      </Card.Content>
+    </Card>
+  )
 }
 
 
-  export default OrderCard
+export default OrderCard
 

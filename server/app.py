@@ -65,6 +65,8 @@ class Orders(Resource):
     
 
     
+
+    
 api.add_resource(Orders, '/orders')
 
 class OrdersById(Resource):
@@ -72,7 +74,7 @@ class OrdersById(Resource):
         order = Order.query.filter_by(id = id).first()
         db.session.delete(order)
         db.session.commit()
-        return make_response({}, 404)
+        return make_response({}, 202)
     
     
     def patch(self, id):
@@ -86,7 +88,7 @@ class OrdersById(Resource):
             except ValueError as v_error:
                 return make_response({"errors": [str(v_error)]}, 422)
         db.session.commit()
-        return make_response(orderToChange.to_dict())
+        return make_response(orderToChange.to_dict(), 201)
 
 
     

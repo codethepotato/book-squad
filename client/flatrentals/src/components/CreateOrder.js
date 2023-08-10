@@ -10,6 +10,21 @@ function CreateOrder() {
         setOrder(!order)
     }
 
+    const validate = (values) => {
+        const errors = {};
+  
+        if (!values.cost) {
+            errors.name = 'Cost is required';
+        }
+        if (!values.user_id) {
+            errors.user_id = 'User ID is required'
+        }
+        if (!values.programmer_id){
+            errors.programmer_id = "Programmer ID is Required"
+        }
+        return errors; 
+    }
+
     const initialValues = {
         cost: "",
         user_id: "",
@@ -42,7 +57,7 @@ function CreateOrder() {
         {order ? (
             <div>
                 <h2>Place Order</h2>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                <Formik initialValues={initialValues} onSubmit={handleSubmit} validate={validate}>
                     <Form>
                         <div>
                             <label>Cost</label>
