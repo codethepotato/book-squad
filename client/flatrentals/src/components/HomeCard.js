@@ -2,12 +2,7 @@ import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react'
 
 
-function HomeCard({ name, specialty, picture, selectedOrders, setSelectedOrders }) {
-
-  function handleOrder() {
-    setSelectedOrders(prevOrders => [...prevOrders, { name, specialty, picture }])
-    console.log('was clicked')
-  }
+function HomeCard({ name, specialty, picture}) {
 
   return (
     <div className="column">
@@ -21,12 +16,6 @@ function HomeCard({ name, specialty, picture, selectedOrders, setSelectedOrders 
           <Card.Description>
             {specialty}
           </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon onClick={handleOrder} name='user' />
-            Order
-          </a>
         </Card.Content>
       </Card>
     </div>

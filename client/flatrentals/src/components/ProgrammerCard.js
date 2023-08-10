@@ -17,12 +17,6 @@ function ProgrammerCard({name, picture, specialty}){
             {specialty}
           </Card.Description>
         </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon  name='user' />
-            Order
-          </a>
-        </Card.Content>
       </Card>
     </div>
         

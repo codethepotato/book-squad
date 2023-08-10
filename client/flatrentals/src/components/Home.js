@@ -1,13 +1,10 @@
 import React from "react";
 import HomeCard from './HomeCard'
-import {useState} from 'react'
 import TopBanner from './TopBanner'
 import Signup from './Signup'
-import CreateOrder from './CreateOrder'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import User from './User'
 
-
-function Home({ programmers, selectedOrders, setSelectedOrders }) {
+function Home({programmers}) {
 
     const programmerList = programmers.map(p => {
         return <HomeCard
@@ -15,12 +12,12 @@ function Home({ programmers, selectedOrders, setSelectedOrders }) {
             name={p.name}
             picture={p.picture}
             specialty={p.specialty}
-            selectedOrders={selectedOrders}
-            setSelectedOrders={setSelectedOrders} />
+            />
     })
     return (
         <div className="Homepage">
             <div>
+                <User />
                 <TopBanner />
                 <Signup />
                 <div className="ui stackable four column grid">

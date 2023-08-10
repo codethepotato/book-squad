@@ -7,11 +7,10 @@ import { useEffect, useState } from 'react';
 import Home from './Home';
 import Navigation from './NavBar';
 
+
 function App() {
 
   const [programmers, setProgrammers] = useState([])
-
-  const [selectedOrders, setSelectedOrders] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:5555/programmers')
@@ -26,9 +25,9 @@ function App() {
     <div>
       <Navigation />
       <Routes>
-        <Route path='/' element={<Home programmers={programmers} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} />}></Route>
+        <Route path='/' element={<Home programmers={programmers}/>}></Route>
         <Route path='/Programmers' element={<Programmers programmers={programmers} />}></Route>
-        <Route path='/Orders' element={<Orders selectedOrders={selectedOrders} />}></Route>
+        <Route path='/Orders' element={<Orders />}></Route>
       </Routes>
     </div>
   )

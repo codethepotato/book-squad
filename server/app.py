@@ -68,11 +68,12 @@ class Orders(Resource):
 api.add_resource(Orders, '/orders')
 
 class OrdersById(Resource):
-    def get(self, id):
+    def delete(self, id):
         order = Order.query.filter_by(id = id).first()
         db.session.delete(order)
         db.session.commit()
         return make_response({}, 404)
+    
     
     def patch(self, id):
         orderToChange = Order.query.filter_by(id=id).first()
